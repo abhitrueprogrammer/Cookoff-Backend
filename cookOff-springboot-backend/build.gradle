@@ -1,0 +1,88 @@
+plugins {
+	id 'java'
+	id 'application'
+	id 'org.javamodularity.moduleplugin' version '1.8.12'
+	id 'org.openjfx.javafxplugin' version '0.0.13'
+	id 'org.beryx.jlink' version '2.25.0'
+	id 'org.springframework.boot' version '3.2.0'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.flywaydb.flyway' version '9.22.3'
+}
+
+group = 'com.uni'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
+javafx {
+	version = '21.0.6'
+	modules = ['javafx.controls', 'javafx.fxml']
+}
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.snakeyaml:snakeyaml-engine:2.6'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.flywaydb:flyway-mysql"
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'com.github.f4b6a3:uuid-creator:5.3.2'
+	implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+
+
+
+	// Spring Boot Starter Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// JWT (JSON Web Token) library
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5' // For JSON processing with Jackson
+
+	// Jackson for JSON processing
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+	// Lombok (optional, for reducing boilerplate code)
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Spring Boot DevTools (optional, for development purposes)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Testing dependencies (optional)
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.postgresql:postgresql'
+	implementation 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
